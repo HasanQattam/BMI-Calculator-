@@ -13,3 +13,24 @@ const labelTextStyle = TextStyle(
   fontSize: 18.0,
   color: Color(0xFF8D8E98),
 );
+const largButton = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+const titleText = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
+);
+const resultTextStyle = TextStyle(
+  color: Color(0xFF42D876),
+  fontSize: 22,
+  fontWeight: FontWeight.bold,
+);
+
+const bmiTextStyle = TextStyle(
+  fontSize: 100,
+  fontWeight: FontWeight.bold,
+);
+const bodyTextStyle = TextStyle(
+  fontSize: 22,
+);

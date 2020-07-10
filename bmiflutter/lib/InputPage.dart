@@ -17,6 +17,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectGender;
   int hight = 180;
+  int weight = 70;
+  int age = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReusableCard(
-              colour: colorCard,
+              colour: colorCard2,
               cardchild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -102,9 +104,11 @@ class _InputPageState extends State<InputPage> {
                     child: Slider(
                       value: hight.toDouble(),
                       onChanged: (double newValue) {
-                        setState(() {
-                          hight = newValue.round();
-                        });
+                        setState(
+                          () {
+                            hight = newValue.round();
+                          },
+                        );
                       },
                       min: 120.0,
                       max: 220,
@@ -119,25 +123,140 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    colour: colorCard,
+                    colour: colorCard2,
+                    cardchild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'WEIGHT',
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: numberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconBoutton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconBoutton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: colorCard,
+                    colour: colorCard2,
+                    cardchild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Age',
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: numberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconBoutton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconBoutton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            color: bottomContainerColor,
-            margin: EdgeInsets.only(top: 10),
-            width: double.infinity,
-            height: bottomContainerHight,
-          )
+          BottomButtom()
         ],
       ),
+    );
+  }
+}
+
+class BottomButtom extends StatelessWidget {
+  BottomButtom({@required this.onTap, @required this.bottomTextButton});
+  final Function onTap;
+  final String bottomTextButton;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/resultsPage');
+      },
+      child: Container(
+        child: Center(
+          child: Text(
+            'CALCULATE',
+            style: largButton,
+          ),
+        ),
+        color: bottomContainerColor,
+        margin: EdgeInsets.only(top: 10),
+        padding: EdgeInsets.only(bottom: 15),
+        width: double.infinity,
+        height: bottomContainerHight,
+      ),
+    );
+  }
+}
+
+class RoundIconBoutton extends StatelessWidget {
+  RoundIconBoutton({@required this.icon, @required this.onPressed});
+  final IconData icon;
+  final Function onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      onPressed: onPressed,
+      constraints: BoxConstraints.tightFor(
+        width: 43.0,
+        height: 43.0,
+      ),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
     );
   }
 }
