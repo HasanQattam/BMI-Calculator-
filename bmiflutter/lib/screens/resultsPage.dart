@@ -1,7 +1,7 @@
-import 'package:bmiflutter/reusable_card.dart';
+import 'package:bmiflutter/components/reusable_card.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'InputPage.dart';
+import '../constants.dart';
+import '../components/bottomButton.dart';
 
 class ResultsPage extends StatelessWidget {
   @override
@@ -45,7 +45,12 @@ class ResultsPage extends StatelessWidget {
               ),
             ),
           ),
-          BottomButtom(),
+          BottomButtom(
+            bottomTextButton: 'RE-CALCULATE',
+            onTap: () {
+              Navigator.pop(context, '/resultsPage');
+            },
+          ),
         ],
       ),
     );
