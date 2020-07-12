@@ -1,3 +1,4 @@
+import 'package:bmiflutter/screens/resultsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../components/icon_contant.dart';
@@ -5,6 +6,7 @@ import '../components/reusable_card.dart';
 import '../constants.dart';
 import '../components/bottomButton.dart';
 import '../components/roundIconButton.dart';
+import 'package:bmiflutter/appBrain.dart';
 
 enum Gender {
   male,
@@ -18,7 +20,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectGender;
-  int hight = 180;
+  int height = 180;
   int weight = 70;
   int age = 18;
 
@@ -83,7 +85,7 @@ class _InputPageState extends State<InputPage> {
                     textBaseline: TextBaseline.alphabetic,
                     children: <Widget>[
                       Text(
-                        hight.toString(),
+                        height.toString(),
                         style: numberStyle,
                       ),
                       Text(
@@ -104,11 +106,11 @@ class _InputPageState extends State<InputPage> {
                           RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
                     child: Slider(
-                      value: hight.toDouble(),
+                      value: height.toDouble(),
                       onChanged: (double newValue) {
                         setState(
                           () {
-                            hight = newValue.round();
+                            height = newValue.round();
                           },
                         );
                       },
@@ -211,10 +213,22 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           BottomButtom(
-              bottomTextButton: 'CALCULATE',
-              onTap: () {
-                Navigator.pushNamed(context, '/resultsPage');
-              })
+            bottomTextButton: 'CALCULATE',
+            onTap: () {
+              CalculaterBrain brain =
+                  CalculaterBrain(height: height, weight: weight);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: brain.calculateBMI(),
+                    interpretation: brain.getResults(),
+                    textResult: brain.getInterprtation(),
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

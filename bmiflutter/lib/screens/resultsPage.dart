@@ -4,6 +4,14 @@ import '../constants.dart';
 import '../components/bottomButton.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage(
+      {@required this.bmiResult,
+      @required this.interpretation,
+      @required this.textResult});
+
+  final String bmiResult;
+  final String textResult;
+  final String interpretation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,15 +37,15 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Normal',
+                    textResult,
                     style: resultTextStyle,
                   ),
                   Text(
-                    '18',
+                    bmiResult,
                     style: bmiTextStyle,
                   ),
                   Text(
-                    'Stop looking at me like that im just an app  ',
+                    interpretation,
                     style: bodyTextStyle,
                     textAlign: TextAlign.center,
                   ),
@@ -48,7 +56,7 @@ class ResultsPage extends StatelessWidget {
           BottomButtom(
             bottomTextButton: 'RE-CALCULATE',
             onTap: () {
-              Navigator.pop(context, '/resultsPage');
+              Navigator.pop(context);
             },
           ),
         ],
